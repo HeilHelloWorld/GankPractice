@@ -6,6 +6,7 @@ import com.example.lichu.gankpractice.enity.GankBean;
 import com.example.lichu.gankpractice.presenter.DataPresenter;
 import com.example.lichu.gankpractice.utils.RxUtils;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import rx.Observable;
@@ -40,9 +41,42 @@ public class DataManager {
                 .compose(RxUtils.applyIoToMainSchedulers());
     }
 
-    public Observable<List<BasicGankBean>> getGankBeanByNetwork(String type, int size, int page) {
+    public Observable<List<BasicGankBean>> getDataByNetwork(String type, int size, int page) {
         return this.mGankDataModel.getData(type, size, page)
                 .map(gankBean -> gankBean.results)
                 .compose(RxUtils.applyIoToMainSchedulers());
+    }
+    
+    public Observable<ArrayList<ArrayList<BasicGankBean>>> getDailyDetailByDailyResultss(DailyGankBean.DailyResults results) {
+        return Observable.just(results)
+                         .compose(RxUtils.applyIoToMainSchedulers())
+                         .map(dailyResults -> {
+                             ArrayList<ArrayList<BasicGankBean>> dailyDetail = new ArrayList<ArrayList<BasicGankBean>>();
+                             if (dailyResults.welfareData != null && dailyResults.welfareData.size() > 0) {
+                                 dailyDetail.add(dailyResults.welfareData);
+                             }
+                             if (dailyResults.androidData != null && dailyResults.androidData.size() > 0) {
+                                 dailyDetail.add(dailyResults.androidData);
+                             }
+                             if (dailyResults.iosData != null && dailyResults.iosData.size() > 0) {
+                                 dailyDetail.add(dailyResults.iosData);
+                             }
+                             if (dailyResults.jsData != null && dailyResults.jsData.size() > 0) {
+                                 dailyDetail.add(dailyResults.jsData);
+                             }
+                             if (dailyResults.videoData != null && dailyResults.videoData.size() > 0) {
+                                 dailyDetail.add(dailyResults.videoData);
+                             }
+                             if (dailyResults.resourcesData != null && dailyResults.resourcesData.size() > 0) {
+                                 dailyDetail.add(dailyResults.resourcesData);
+                             }
+                             if (dailyResults.appData != null && dailyResults.appData.size() > 0) {
+                                 dailyDetail.add(dailyResults.appData);
+                             }
+                             if (dailyResults.recommendData != null && dailyResults.recommendData.size() > 0) {
+                                 dailyDetail.add(dailyResults.recommendData);
+                             }
+                             return dailyDetail;
+                         }); 
     }
 }
