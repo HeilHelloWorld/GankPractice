@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">GankPractice</string>
+    <string name="daily_details">每日详情</string>
+    <string name="android">Android</string>
+    <string name="ios">ios</string>
+    <string name="welfare_picture">妹子图</string>
+    <string name="js">前端</string>
+    <string name="video">今日视频</string>
+    <string name="resources">资源</string>
+    <string name="app">推荐APP</string>
+    <string name="via">via. %s</string>
+    <string name="app_menu">GankMenu</string>
 </resources>
